@@ -1,8 +1,11 @@
 package com.features.test_app_githubusersearch.api
 
+import android.os.SystemClock
 import com.fasterxml.jackson.databind.ObjectMapper
 import dagger.Module
 import dagger.Provides
+import okhttp3.Dispatcher
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,10 +20,19 @@ class ApiModule(private val baseUrl: String) {
     @Singleton
     fun provideOkHttpClient(
     ): OkHttpClient {
+        val dispatcher = Dispatcher()
+        dispatcher.maxRequests = 1
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
         return OkHttpClient.Builder()
+
+            .addNetworkInterceptor(Interceptor { chain ->
+                SystemClock.sleep(3000)
+                chain.proceed(chain.request()) })
             .addInterceptor(loggingInterceptor)
+            .dispatcher(dispatcher)
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)

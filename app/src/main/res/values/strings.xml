@@ -2,4 +2,9 @@
     <string name="app_name">Test-App-GitHubUserSearch</string>
 
     <string name="base_url">https://api.github.com/</string>
+
+    <string name="repos">Repos: %s</string>
+
+    <string name="forks">Forks %s</string>
+    <string name="stars">Stars %s</string>
 </resources>

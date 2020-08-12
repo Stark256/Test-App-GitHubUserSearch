@@ -4,7 +4,9 @@ import android.app.Application
 import com.features.test_app_githubusersearch.api.ApiModule
 import com.features.test_app_githubusersearch.api.ApiService
 import com.features.test_app_githubusersearch.app.ui.details.DetailsActivity
+import com.features.test_app_githubusersearch.app.ui.details.DetailsViewModelModule
 import com.features.test_app_githubusersearch.app.ui.main.MainActivity
+import com.features.test_app_githubusersearch.app.ui.main.MainViewModelModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,7 +14,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
     AppModule::class,
-    ApiModule::class
+    ApiModule::class,
+    MainViewModelModule::class,
+    DetailsViewModelModule::class
 ))
 interface AppComponent {
 
